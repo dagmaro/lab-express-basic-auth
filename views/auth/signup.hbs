@@ -1,0 +1,19 @@
+<div>
+  <h2>Sign up</h2>
+
+  <form action="/auth/signup" method="post" class="row g-3">
+    <div>
+      <label for="username" class="form-label">Username</label>
+      <input type="text" name="name" class="form-control" />
+    </div>
+    
+    <div>
+      <label for="password" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" />
+    </div>
+    {{#if error}}
+    <span class="text-danger">{{this.error}}</span>
+    {{/if}}
+    <button class="btn btn-primary">Sign up</button>
+  </form>
+</div>
