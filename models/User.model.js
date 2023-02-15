@@ -6,7 +6,12 @@ const userSchema = new Schema({
     type: String,
     unique: true
   },
-  password: String
+  password: String,
+  role: {
+    type: String,
+    enum: ["user","admin"],
+    default: "user"
+  }
 });
 
 const User = model("User", userSchema);

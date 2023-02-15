@@ -10,7 +10,7 @@ router.get("/signup", (req, res, next) => {
 
 // POST "/auth/signup"
 router.post("/signup", async (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password} = req.body;
 
   // validación password
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
@@ -45,6 +45,7 @@ router.post("/signup", async (req, res, next) => {
       username: username,
       password: hashpassword,
     });
+
     res.redirect("/auth/login");
   } catch (error) {
     next(error);
@@ -69,6 +70,7 @@ router.post("/login",async(req,res,next)=>{
   try {
     // Verificacion si el user esta registrado
     const foundUser = await User.findOne({username: username})
+    console.log(foundUser)
     if (foundUser === null) {
       res.render("auth/login.hbs",{
         error: "Username is not registered"
