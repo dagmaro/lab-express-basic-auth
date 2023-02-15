@@ -15,15 +15,18 @@
   </head>
 
   <body>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/auth/signup">Sign up</a>
-      <a href="/auth/login">Log in</a>
-      <a href="/profile">Secret profile</a>
-      <a href="/profile/main">No tan secret</a>
-      <a href="/auth/logout">Log out</a>
+    <nav class="nav nav-tabs" id="myTab" role="tablist">
+      <a class="nav-link active"  href="/">Home</a>
+      <a class="nav-link active" href="/auth/signup">Sign up</a>
+      <a class="nav-link active" href="/auth/login">Log in</a>
+      <a class="nav-link active" href="/auth/logout">Log out</a>
+      <a class="nav-link active" href="/profile/main">No tan secret</a>
+      <a class="nav-link active" href="/profile">Secret profile</a>
     </nav>
+
+    <div class="d-flex justify-content-center mt-5">
     {{{body}}}
+    </div>
 
     <script src="/js/script.js"></script>
     <script
