@@ -1,7 +1,7 @@
 <div>
-  <h2>Sign up</h2>
+  <h2>Login</h2>
 
-  <form action="/auth/signup" method="post" class="row g-3">
+  <form action="/auth/login" method="post" class="row g-3">
     <div>
       <label for="username" class="form-label">Username</label>
       <input type="text" name="name" class="form-control" />
@@ -14,6 +14,6 @@
     {{#if error}}
       <span class="text-danger">{{this.error}}</span>
     {{/if}}
-    <button class="btn btn-primary">Sign up</button>
+    <button class="btn btn-primary">Log in</button>
   </form>
 </div>

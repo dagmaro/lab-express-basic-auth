@@ -8,7 +8,7 @@ router.get("/signup", (req, res, next) => {
   res.render("auth/signup.hbs");
 });
 
-// POST
+// POST "/auth/signup"
 router.post("/signup", async (req, res, next) => {
   const { username, password } = req.body;
 
@@ -50,5 +50,54 @@ router.post("/signup", async (req, res, next) => {
     next(error);
   }
 });
+
+// GET "/auth/login"
+router.get("/login",(req,res,next)=>{
+  res.render("auth/login.hbs")
+})
+
+// POST "/auth/login"
+router.post("/login",async(req,res,next)=>{
+  const {username, password} = req.body
+  // validación fields
+  if (username === "" || password === "") {
+    res.render("auth/signup.hbs", {
+      error: "All the fields should not be empty",
+    });
+    return;
+  }
+  try {
+    // Verificacion si el user esta registrado
+    const foundUser = await User.findOne({username: username})
+    if (foundUser === null) {
+      res.render("auth/login.hbs",{
+        error: "Username is not registered"
+      })
+      return
+    }
+    // Verificacion si el password es correcto o no
+    const passwordIsCorrect = await bcrypt.compare(password, foundUser.password)
+    if (passwordIsCorrect === false){
+      res.render("auth/login.hbs", {
+        error: "Incorrect password"
+      })
+      return
+    }
+    // Verificar si el user esta activo en la sesion
+    req.session.activeUser = foundUser;
+    req.session.save(()=>{
+      res.redirect("/profile")
+    })
+  } catch (error) {
+    next(error)
+  }
+  // Verificacion de logout
+  router.get("/logout", (req,res,next)=>{
+    req.session.destroy(()=>{
+      res.redirect("/")
+    })
+  })
+})
+
 
 module.exports = router;
